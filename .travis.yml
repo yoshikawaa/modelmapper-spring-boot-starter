@@ -1,0 +1,16 @@
+language: java
+jdk:
+  - openjdk12
+addons:
+cache:
+  directories:
+    - $HOME/.m2
+install:
+  - export CODACY_COVERAGE_REPORTER_VERSION=6.0.0
+  - export CODACY_PROJECT_TOKEN=1d1d5ab89b074a92a97542a071a3a748
+  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/${CODACY_COVERAGE_REPORTER_VERSION}/codacy-coverage-reporter-${CODACY_COVERAGE_REPORTER_VERSION}-assembly.jar
+script:
+  - mvn clean install
+after_script:
+  - mvn jacoco:report -pl modelmapper-spring-boot-autoconfigure
+  - java -jar codacy-coverage-reporter-${CODACY_COVERAGE_REPORTER_VERSION}-assembly.jar report -l Java -r modelmapper-spring-boot-autoconfigure/target/site/jacoco/jacoco.xml
