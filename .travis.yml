@@ -1,6 +1,8 @@
 language: java
 jdk:
   - openjdk12
+  - openjdk11
+  - openjdk8
 addons:
 cache:
   directories:

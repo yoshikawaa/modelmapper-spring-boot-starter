@@ -82,8 +82,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M3</version><!--$NO-MVN-MAN-VER$-->
                 <configuration>
-                    <argLine>${jacocoArgs} --illegal-access=permit</argLine>
+                    <argLine>${jacocoArgs}</argLine>
                 </configuration>
             </plugin>
             <plugin>

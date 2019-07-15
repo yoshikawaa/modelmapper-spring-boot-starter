@@ -51,7 +51,7 @@ public class ModelMapperProperties {
     private Boolean fieldMatchingEnabled;
     private Boolean ambiguityIgnored;
     private Boolean fullTypeMatchingRequired;
-    private Boolean ImplicitMappingEnabled;
+    private Boolean implicitMappingEnabled;
     private Boolean skipNullEnabled;
     private Boolean collectionsMergeEnabled;
     private Boolean useOSGiClassLoaderBridging;

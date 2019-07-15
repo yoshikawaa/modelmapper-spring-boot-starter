@@ -16,6 +16,7 @@
 package io.github.yoshikawaa.modelmapper.spring.boot.autoconfigure;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.Condition;
 import org.modelmapper.Converter;
@@ -67,7 +68,7 @@ public class ModelMapperAutoConfiguration {
      * @param conditionProvider          {@link Condition} bean
      * @param typeMapConfigurersProvider {@link TypeMapConfigurer} beans
      * @param convertersProvider         {@link Converter} beans
-     * @param modulesProvider         {@link Module} beans
+     * @param modulesProvider            {@link Module} beans
      * @return Configured {@link ModelMapper}
      */
     @Bean
@@ -82,21 +83,54 @@ public class ModelMapperAutoConfiguration {
         log.trace("Configure ModelMapper with ModelMapperAutoConfiguration.");
         ModelMapper modelMapper = new ModelMapper();
 
-        // configure
-        configure(modelMapper, properties, providerProvider, conditionProvider, typeMapConfigurersProvider,
+        configureProperties(modelMapper.getConfiguration(), properties);
+        configureMappings(modelMapper, providerProvider, conditionProvider, typeMapConfigurersProvider,
                 convertersProvider, modulesProvider);
-
-        // logging & validate
+        validateMappings(modelMapper, properties);
         loggingConfiguration(modelMapper);
-        if (properties.isValidateEnabled()) {
-            modelMapper.validate();
-            log.trace("Validate ModelMapper Configuration succeed.");
-        }
 
         return modelMapper;
     }
 
-    private void configure(ModelMapper modelMapper, ModelMapperProperties properties,
+    private void configureProperties(Configuration configuration, ModelMapperProperties properties) {
+
+        Optional.ofNullable(properties.getSourceNameTokenizer())
+                .ifPresent(nameTokenizer -> configuration.setSourceNameTokenizer(nameTokenizer));
+        Optional.ofNullable(properties.getSourceNameTransformer())
+                .ifPresent(nameTransformer -> configuration.setSourceNameTransformer(nameTransformer));
+        Optional.ofNullable(properties.getSourceNamingConvention())
+                .ifPresent(namingConvention -> configuration.setSourceNamingConvention(namingConvention));
+        Optional.ofNullable(properties.getDestinationNameTokenizer())
+                .ifPresent(nameTokenizer -> configuration.setDestinationNameTokenizer(nameTokenizer));
+        Optional.ofNullable(properties.getDestinationNameTransformer())
+                .ifPresent(nameTransformer -> configuration.setDestinationNameTransformer(nameTransformer));
+        Optional.ofNullable(properties.getDestinationNamingConvention())
+                .ifPresent(namingConvention -> configuration.setDestinationNamingConvention(namingConvention));
+        Optional.ofNullable(properties.getMatchingStrategy())
+                .ifPresent(matchingStrategy -> configuration.setMatchingStrategy(matchingStrategy));
+        Optional.ofNullable(properties.getFieldAccessLevel())
+                .ifPresent(accessLevel -> configuration.setFieldAccessLevel(accessLevel));
+        Optional.ofNullable(properties.getMethodAccessLevel())
+                .ifPresent(accessLevel -> configuration.setMethodAccessLevel(accessLevel));
+        Optional.ofNullable(properties.getFieldMatchingEnabled())
+                .ifPresent(enabled -> configuration.setFieldMatchingEnabled(enabled));
+        Optional.ofNullable(properties.getAmbiguityIgnored())
+                .ifPresent(ignore -> configuration.setAmbiguityIgnored(ignore));
+        Optional.ofNullable(properties.getFullTypeMatchingRequired())
+                .ifPresent(required -> configuration.setFullTypeMatchingRequired(required));
+        Optional.ofNullable(properties.getSkipNullEnabled())
+                .ifPresent(enabled -> configuration.setSkipNullEnabled(enabled));
+        Optional.ofNullable(properties.getImplicitMappingEnabled())
+                .ifPresent(enabled -> configuration.setImplicitMappingEnabled(enabled));
+        Optional.ofNullable(properties.getCollectionsMergeEnabled())
+                .ifPresent(enabled -> configuration.setCollectionsMergeEnabled(enabled));
+        Optional.ofNullable(properties.getUseOSGiClassLoaderBridging())
+                .ifPresent(useOSGiClassLoaderBridging -> configuration.setUseOSGiClassLoaderBridging(useOSGiClassLoaderBridging));
+        Optional.ofNullable(properties.getDeepCopyEnabled())
+                .ifPresent(enabled -> configuration.setDeepCopyEnabled(enabled));
+    }
+
+    private void configureMappings(ModelMapper modelMapper,
             ObjectProvider<Provider<?>> providerProvider,
             ObjectProvider<Condition<?, ?>> conditionProvider,
             ObjectProvider<List<TypeMapConfigurer<?, ?>>> typeMapConfigurersProvider,
@@ -105,43 +139,6 @@ public class ModelMapperAutoConfiguration {
 
         Configuration configuration = modelMapper.getConfiguration();
 
-        // set properties
-        if (properties.getSourceNameTokenizer() != null)
-            configuration.setSourceNameTokenizer(properties.getDestinationNameTokenizer());
-        if (properties.getSourceNameTransformer() != null)
-            configuration.setSourceNameTransformer(properties.getSourceNameTransformer());
-        if (properties.getSourceNamingConvention() != null)
-            configuration.setSourceNamingConvention(properties.getSourceNamingConvention());
-        if (properties.getDestinationNameTokenizer() != null)
-            configuration.setDestinationNameTokenizer(properties.getDestinationNameTokenizer());
-        if (properties.getDestinationNameTransformer() != null)
-            configuration.setDestinationNameTransformer(properties.getDestinationNameTransformer());
-        if (properties.getDestinationNamingConvention() != null)
-            configuration.setDestinationNamingConvention(properties.getDestinationNamingConvention());
-        if (properties.getMatchingStrategy() != null)
-            configuration.setMatchingStrategy(properties.getMatchingStrategy());
-        if (properties.getFieldAccessLevel() != null)
-            configuration.setFieldAccessLevel(properties.getFieldAccessLevel());
-        if (properties.getMethodAccessLevel() != null)
-            configuration.setMethodAccessLevel(properties.getMethodAccessLevel());
-        if (properties.getFieldMatchingEnabled() != null)
-            configuration.setFieldMatchingEnabled(properties.getFieldMatchingEnabled());
-        if (properties.getAmbiguityIgnored() != null)
-            configuration.setAmbiguityIgnored(properties.getAmbiguityIgnored());
-        if (properties.getFullTypeMatchingRequired() != null)
-            configuration.setFullTypeMatchingRequired(properties.getFullTypeMatchingRequired());
-        if (properties.getImplicitMappingEnabled() != null)
-            configuration.setImplicitMappingEnabled(properties.getImplicitMappingEnabled());
-        if (properties.getSkipNullEnabled() != null)
-            configuration.setSkipNullEnabled(properties.getSkipNullEnabled());
-        if (properties.getCollectionsMergeEnabled() != null)
-            configuration.setCollectionsMergeEnabled(properties.getCollectionsMergeEnabled());
-        if (properties.getUseOSGiClassLoaderBridging() != null)
-            configuration.setUseOSGiClassLoaderBridging(properties.getUseOSGiClassLoaderBridging());
-        if (properties.getDeepCopyEnabled() != null)
-            configuration.setDeepCopyEnabled(properties.getDeepCopyEnabled());
-
-        // customize
         providerProvider.ifAvailable(provider -> configuration.setProvider(provider));
         conditionProvider.ifAvailable(condition -> configuration.setPropertyCondition(condition));
         typeMapConfigurersProvider.ifAvailable(typeMapConfigurers -> typeMapConfigurers
@@ -151,7 +148,16 @@ public class ModelMapperAutoConfiguration {
         modulesProvider.ifAvailable(modules -> modules.forEach(module -> modelMapper.registerModule(module)));
     }
 
+    private void validateMappings(ModelMapper modelMapper, ModelMapperProperties properties) {
+
+        if (properties.isValidateEnabled()) {
+            modelMapper.validate();
+            log.trace("Validate ModelMapper Configuration succeed.");
+        }
+    }
+
     private void loggingConfiguration(ModelMapper modelMapper) {
+
         if (log.isTraceEnabled()) {
             log.trace(
                     "ModelMapper Configuration ==========================================================================");
