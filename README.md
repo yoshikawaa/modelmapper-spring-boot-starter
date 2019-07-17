@@ -1,6 +1,6 @@
 # modelmapper-spring-boot-starter
 
-[![Build Status](https://travis-ci.org/yoshikawaa/modelmapper-spring-boot-starter.svg?branch=master)](https://travis-ci.org/yoshikawaa/modelmapper-spring-boot-starter)
+[![Build Status](https://travis-ci.org/yoshikawaa/modelmapper-spring-boot-starter.svg?branch=spring-boot-2.1)](https://travis-ci.org/yoshikawaa/modelmapper-spring-boot-starter)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a25932a37744e39903c03f749be0726)](https://www.codacy.com/app/yoshikawaa/modelmapper-spring-boot-starter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yoshikawaa/modelmapper-spring-boot-starter&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/4a25932a37744e39903c03f749be0726)](https://www.codacy.com/app/yoshikawaa/modelmapper-spring-boot-starter?utm_source=github.com&utm_medium=referral&utm_content=yoshikawaa/modelmapper-spring-boot-starter&utm_campaign=Badge_Coverage)
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/io.github.yoshikawaa.modelmapper.spring.boot/modelmapper-spring-boot-starter.svg)](https://oss.sonatype.org/content/repositories/snapshots/io/github/yoshikawaa/modelmapper/spring/boot/modelmapper-spring-boot-starter/)
@@ -12,7 +12,7 @@ Spring Boot Starter for [ModelMapper](http://modelmapper.org).
 
 * Supports upper Java 8
 * Supports ModelMapper 2.3.5
-* Supports Spring Boot 2.2.0
+* Supports Spring Boot 2.1.6
 
 ----
 
