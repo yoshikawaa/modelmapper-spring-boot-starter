@@ -60,9 +60,11 @@ public Destination sample(Source source) {
 
 ----
 
-## Configuration
+## Features
 
-### Property Mapping
+### Bean Based Configuration
+
+#### Property Mapping
 
 Define a `TypeMapConfigurer` bean.
 Please see [Property Mapping](http://modelmapper.org/user-manual/property-mapping/).
@@ -79,7 +81,7 @@ TypeMapConfigurer<Source, Destination> typeMap() {
 }
 ```
 
-### Converters
+#### Converters
 
 Define a `Converter` or `AbstractConverter`bean.
 Please see [Converters](http://modelmapper.org/user-manual/converters/).
@@ -99,7 +101,7 @@ Converter<String, String> converter() {
 > Notice.
 > Now, `Converter` for the entire application can not be defined as functional interface. See [modelmapper#487](https://github.com/modelmapper/modelmapper/issues/487).
 
-### Providers
+#### Providers
 
 Define a `Provider` or `AbstractProvider`bean.
 Please see [Providers](http://modelmapper.org/user-manual/providers/).
@@ -118,7 +120,7 @@ Provider<Object> provider() {
 > Only one `Provider` can be registered for the entire application.
 > Please register specific type `Provider` using Property Mapping.
 
-### Conditional Mapping
+#### Conditional Mapping
 
 Define a `Condition` bean.
 Please see [Conditional Mapping](http://modelmapper.org/user-manual/property-mapping/#conditional-mapping).
@@ -134,9 +136,21 @@ Condition<String, String> condition() {
 > Only one `Condition` can be registered for the entire application.
 > Please register specific type `Condition` using Property Mapping.
 
-### Property Configuration
+#### More Customize
 
-Use Spring Boot Property Configuration to change the behavior of `ModelMapper`.
+You can customize `ModelMapper` freely to define a `Module` bean.
+
+```java
+@Bean
+Module module() {
+    return modelMapper -> /* cutomize */;
+}
+```
+### Property Based Configuration
+
+#### Behavior
+
+Change the behavior of `ModelMapper`.
 Please see [Configuration](http://modelmapper.org/user-manual/configuration/).
 
 | name                                         | candidates                                       |
@@ -159,7 +173,7 @@ Please see [Configuration](http://modelmapper.org/user-manual/configuration/).
 | modelmapper.use-o-s-gi-class-loader-bridging | boolean                                          |
 | modelmapper.deep-copy-enabled                | boolean                                          |
 
-### Spring Integration
+#### Spring Integration
 
 Register `SpringProvider` use Spring BeanFactory to provide destination objects.
 Please see [Spring Integration](http://modelmapper.org/user-manual/spring-integration/).
@@ -168,30 +182,20 @@ Please see [Spring Integration](http://modelmapper.org/user-manual/spring-integr
 |-------------------------------------|------------|
 | modelmapper.spring-provider-enabled | boolean    |
 
-### Validation
+#### Validation
 
-Validate Property Mapping Configuration.
+Validate Property Mapping.
 Please see [Validation](http://modelmapper.org/user-manual/validation/).
 
 | name                         | candidates |
 |------------------------------|------------|
 | modelmapper.validate-enabled | boolean    |
 
-### Logging
+#### Logging
 
-If you want to log Configuration, enable trace log.
+If you want to log Configuration, enable trace level log.
 
 | name                                                                     | candidates |
 |--------------------------------------------------------------------------|------------|
 | logging.level.io.github.yoshikawaa.modelmapper.spring.boot.autoconfigure | `trace`    |
 
-### More Customize
-
-You can customize `ModelMapper` freely to define a `Module` bean.
-
-```java
-@Bean
-Module module() {
-    return modelMapper -> /* cutomize */;
-}
-```
