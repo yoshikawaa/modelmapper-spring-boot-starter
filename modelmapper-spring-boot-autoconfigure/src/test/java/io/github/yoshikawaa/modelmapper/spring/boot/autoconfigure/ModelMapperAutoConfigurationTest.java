@@ -259,7 +259,6 @@ class ModelMapperAutoConfigurationTest {
             assertThat(properties.isSpringProviderEnabled()).isEqualTo(true);
             assertThat(configuration.getProvider().getClass().getSimpleName()).contains("SpringProvider");
             assertThat(output).contains("Validate ModelMapper Configuration succeed.");
-
         }
     }
 
@@ -328,7 +327,7 @@ class ModelMapperAutoConfigurationTest {
         private ModelMapper modelMapper;
 
         @Test
-        void test(CapturedOutput output) {
+        void test() {
             // assert
             Configuration configuration = modelMapper.getConfiguration();
             assertThat(configuration.getSourceNameTokenizer()).isEqualTo(NameTokenizers.CAMEL_CASE);
