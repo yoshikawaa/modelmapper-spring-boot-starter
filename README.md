@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/yoshikawaa/modelmapper-spring-boot-starter.svg?branch=spring-boot-2.1)](https://travis-ci.org/yoshikawaa/modelmapper-spring-boot-starter)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a25932a37744e39903c03f749be0726)](https://www.codacy.com/app/yoshikawaa/modelmapper-spring-boot-starter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=yoshikawaa/modelmapper-spring-boot-starter&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/4a25932a37744e39903c03f749be0726)](https://www.codacy.com/app/yoshikawaa/modelmapper-spring-boot-starter?utm_source=github.com&utm_medium=referral&utm_content=yoshikawaa/modelmapper-spring-boot-starter&utm_campaign=Badge_Coverage)
-[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/https/oss.sonatype.org/io.github.yoshikawaa.modelmapper.spring.boot/modelmapper-spring-boot-starter.svg)](https://oss.sonatype.org/content/repositories/snapshots/io/github/yoshikawaa/modelmapper/spring/boot/modelmapper-spring-boot-starter/)
+![Maven Central](https://img.shields.io/maven-central/v/io.github.yoshikawaa.modelmapper.spring.boot/modelmapper-spring-boot-starter.svg)
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat)](https://github.com/yoshikawaa/modelmapper-spring-boot-starter/blob/master/LICENSE.txt)
 
 Spring Boot Starter for [ModelMapper](http://modelmapper.org).
@@ -18,21 +18,6 @@ Spring Boot Starter for [ModelMapper](http://modelmapper.org).
 
 ## Getting Start
 
-### Configure Maven
-
-If you want to use SNAPSHOT version, add SNAPSHOT repository. (settings.xml or pom.xml)
-
-```xml
-<repositories>
-    <repository>
-        <id>sonatype-snapshots</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        <releases><enabled>false</enabled></releases>
-        <snapshots><enabled>true</enabled></snapshots>
-    </repository>
-</repositories>
-```
-
 ### Configure dependency
 
 Add dependency `modelmapper-spring-boot-starter`.
@@ -41,7 +26,7 @@ Add dependency `modelmapper-spring-boot-starter`.
 <dependency>
     <groupId>io.github.yoshikawaa.modelmapper.spring.boot</groupId>
     <artifactId>modelmapper-spring-boot-starter</artifactId>
-    <version><!--$VERSION$--></version>
+    <version>0.1.0</version>
 </dependency>
 ```
 

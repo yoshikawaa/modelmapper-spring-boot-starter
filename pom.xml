@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.yoshikawaa.modelmapper.spring.boot</groupId>
     <artifactId>modelmapper-spring-boot</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>pom</packaging>
     <name>modelmapper-spring-boot</name>
     <description>Spring Boot Support for ModelMapper</description>
