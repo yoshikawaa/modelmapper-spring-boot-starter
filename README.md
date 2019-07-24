@@ -77,7 +77,7 @@ Please see [Converters](http://modelmapper.org/user-manual/converters/).
 Converter<String, String> converter() {
     return new Converter<String, String>() {
         @Override
-        public Email convert(MappingContext<String, String> context) {
+        public String convert(MappingContext<String, String> context) {
             return context.getSource() == null ? null : context.getSource().toUppercase();
         }
     };
