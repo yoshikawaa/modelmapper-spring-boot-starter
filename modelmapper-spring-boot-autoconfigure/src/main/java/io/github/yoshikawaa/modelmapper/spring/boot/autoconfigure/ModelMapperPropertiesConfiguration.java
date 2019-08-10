@@ -43,7 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 @ConditionalOnClass(ModelMapper.class)
 public class ModelMapperPropertiesConfiguration {
 
-    private static final String LOG_FORMAT_INVALID = "{} not allow [{}], convert to null.";
+    private static final String LOG_FORMAT_INVALID = "{} not allow [{}], use default.";
 
     /**
      * Build {@link Converter} from {@link String} to {@link NameTokenizer}.
@@ -62,7 +62,7 @@ public class ModelMapperPropertiesConfiguration {
                     return NameTokenizers.CAMEL_CASE;
                 if (source.equalsIgnoreCase(NameTokenizers.UNDERSCORE.toString()))
                     return NameTokenizers.UNDERSCORE;
-                log.trace(LOG_FORMAT_INVALID, NameTokenizer.class.getName(), source);
+                log.warn(LOG_FORMAT_INVALID, NameTokenizer.class.getName(), source);
                 return null;
             }
         };
@@ -85,7 +85,7 @@ public class ModelMapperPropertiesConfiguration {
                     return NameTransformers.JAVABEANS_ACCESSOR;
                 if (source.equalsIgnoreCase(NameTransformers.JAVABEANS_MUTATOR.toString()))
                     return NameTransformers.JAVABEANS_MUTATOR;
-                log.trace(LOG_FORMAT_INVALID, NameTransformer.class.getName(), source);
+                log.warn(LOG_FORMAT_INVALID, NameTransformer.class.getName(), source);
                 return null;
             }
         };
@@ -110,7 +110,7 @@ public class ModelMapperPropertiesConfiguration {
                     return NamingConventions.JAVABEANS_MUTATOR;
                 if (source.equalsIgnoreCase(NamingConventions.NONE.toString()))
                     return NamingConventions.NONE;
-                log.trace(LOG_FORMAT_INVALID, NamingConvention.class.getName(), source);
+                log.warn(LOG_FORMAT_INVALID, NamingConvention.class.getName(), source);
                 return null;
             }
         };
@@ -135,7 +135,7 @@ public class ModelMapperPropertiesConfiguration {
                     return MatchingStrategies.STANDARD;
                 if (source.equalsIgnoreCase(MatchingStrategies.STRICT.toString()))
                     return MatchingStrategies.STRICT;
-                log.trace(LOG_FORMAT_INVALID, MatchingStrategy.class.getName(), source);
+                log.warn(LOG_FORMAT_INVALID, MatchingStrategy.class.getName(), source);
                 return null;
             }
         };

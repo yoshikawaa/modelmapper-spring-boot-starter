@@ -49,7 +49,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ModelMapperAutoConfiguration {
 
     /**
-     * Build {@link Provider} for Spring Integration.
+     * Build {@link Provider} for {@link SpringIntegration}.
      *
      * @param beanFactory Spring Bean Factory
      * @return Spring Provider
@@ -83,7 +83,7 @@ public class ModelMapperAutoConfiguration {
         log.trace("Configure ModelMapper with ModelMapperAutoConfiguration.");
         ModelMapper modelMapper = new ModelMapper();
 
-        configureProperties(modelMapper.getConfiguration(), properties);
+        configureConfiguration(modelMapper, properties);
         configureMappings(modelMapper, providerProvider, conditionProvider, typeMapConfigurersProvider,
                 convertersProvider, modulesProvider);
         validateMappings(modelMapper, properties);
@@ -92,42 +92,47 @@ public class ModelMapperAutoConfiguration {
         return modelMapper;
     }
 
-    private void configureProperties(Configuration configuration, ModelMapperProperties properties) {
+    private void configureConfiguration(ModelMapper modelMapper, ModelMapperProperties properties) {
 
-        Optional.ofNullable(properties.getSourceNameTokenizer())
-                .ifPresent(nameTokenizer -> configuration.setSourceNameTokenizer(nameTokenizer));
-        Optional.ofNullable(properties.getSourceNameTransformer())
-                .ifPresent(nameTransformer -> configuration.setSourceNameTransformer(nameTransformer));
-        Optional.ofNullable(properties.getSourceNamingConvention())
-                .ifPresent(namingConvention -> configuration.setSourceNamingConvention(namingConvention));
-        Optional.ofNullable(properties.getDestinationNameTokenizer())
-                .ifPresent(nameTokenizer -> configuration.setDestinationNameTokenizer(nameTokenizer));
-        Optional.ofNullable(properties.getDestinationNameTransformer())
-                .ifPresent(nameTransformer -> configuration.setDestinationNameTransformer(nameTransformer));
-        Optional.ofNullable(properties.getDestinationNamingConvention())
-                .ifPresent(namingConvention -> configuration.setDestinationNamingConvention(namingConvention));
-        Optional.ofNullable(properties.getMatchingStrategy())
-                .ifPresent(matchingStrategy -> configuration.setMatchingStrategy(matchingStrategy));
-        Optional.ofNullable(properties.getFieldAccessLevel())
-                .ifPresent(accessLevel -> configuration.setFieldAccessLevel(accessLevel));
-        Optional.ofNullable(properties.getMethodAccessLevel())
-                .ifPresent(accessLevel -> configuration.setMethodAccessLevel(accessLevel));
-        Optional.ofNullable(properties.getFieldMatchingEnabled())
-                .ifPresent(enabled -> configuration.setFieldMatchingEnabled(enabled));
-        Optional.ofNullable(properties.getAmbiguityIgnored())
-                .ifPresent(ignore -> configuration.setAmbiguityIgnored(ignore));
-        Optional.ofNullable(properties.getFullTypeMatchingRequired())
-                .ifPresent(required -> configuration.setFullTypeMatchingRequired(required));
-        Optional.ofNullable(properties.getSkipNullEnabled())
-                .ifPresent(enabled -> configuration.setSkipNullEnabled(enabled));
-        Optional.ofNullable(properties.getImplicitMappingEnabled())
-                .ifPresent(enabled -> configuration.setImplicitMappingEnabled(enabled));
-        Optional.ofNullable(properties.getCollectionsMergeEnabled())
-                .ifPresent(enabled -> configuration.setCollectionsMergeEnabled(enabled));
-        Optional.ofNullable(properties.getUseOSGiClassLoaderBridging())
-                .ifPresent(useOSGiClassLoaderBridging -> configuration.setUseOSGiClassLoaderBridging(useOSGiClassLoaderBridging));
-        Optional.ofNullable(properties.getDeepCopyEnabled())
-                .ifPresent(enabled -> configuration.setDeepCopyEnabled(enabled));
+        Optional.ofNullable(properties.getConfiguration()).ifPresent(source -> {
+
+            Configuration destination = modelMapper.getConfiguration();
+
+            Optional.ofNullable(source.getSourceNameTokenizer())
+                .ifPresent(nameTokenizer -> destination.setSourceNameTokenizer(nameTokenizer));
+            Optional.ofNullable(source.getSourceNameTransformer())
+                .ifPresent(nameTransformer -> destination.setSourceNameTransformer(nameTransformer));
+            Optional.ofNullable(source.getSourceNamingConvention())
+                .ifPresent(namingConvention -> destination.setSourceNamingConvention(namingConvention));
+            Optional.ofNullable(source.getDestinationNameTokenizer())
+                .ifPresent(nameTokenizer -> destination.setDestinationNameTokenizer(nameTokenizer));
+            Optional.ofNullable(source.getDestinationNameTransformer())
+                .ifPresent(nameTransformer -> destination.setDestinationNameTransformer(nameTransformer));
+            Optional.ofNullable(source.getDestinationNamingConvention())
+                .ifPresent(namingConvention -> destination.setDestinationNamingConvention(namingConvention));
+            Optional.ofNullable(source.getMatchingStrategy())
+                .ifPresent(matchingStrategy -> destination.setMatchingStrategy(matchingStrategy));
+            Optional.ofNullable(source.getFieldAccessLevel())
+                .ifPresent(accessLevel -> destination.setFieldAccessLevel(accessLevel));
+            Optional.ofNullable(source.getMethodAccessLevel())
+                .ifPresent(accessLevel -> destination.setMethodAccessLevel(accessLevel));
+            Optional.ofNullable(source.getFieldMatchingEnabled())
+                .ifPresent(enabled -> destination.setFieldMatchingEnabled(enabled));
+            Optional.ofNullable(source.getAmbiguityIgnored())
+                .ifPresent(ignore -> destination.setAmbiguityIgnored(ignore));
+            Optional.ofNullable(source.getFullTypeMatchingRequired())
+                .ifPresent(required -> destination.setFullTypeMatchingRequired(required));
+            Optional.ofNullable(source.getImplicitMappingEnabled())
+                .ifPresent(enabled -> destination.setSkipNullEnabled(enabled));
+            Optional.ofNullable(source.getSkipNullEnabled())
+                .ifPresent(enabled -> destination.setImplicitMappingEnabled(enabled));
+            Optional.ofNullable(source.getCollectionsMergeEnabled())
+                .ifPresent(enabled -> destination.setCollectionsMergeEnabled(enabled));
+            Optional.ofNullable(source.getUseOSGiClassLoaderBridging())
+                .ifPresent(useOSGiClassLoaderBridging -> destination.setUseOSGiClassLoaderBridging(useOSGiClassLoaderBridging));
+            Optional.ofNullable(source.getDeepCopyEnabled())
+                .ifPresent(enabled -> destination.setDeepCopyEnabled(enabled));
+        });
     }
 
     private void configureMappings(ModelMapper modelMapper,
@@ -152,7 +157,7 @@ public class ModelMapperAutoConfiguration {
 
         if (properties.isValidateEnabled()) {
             modelMapper.validate();
-            log.trace("Validate ModelMapper Configuration succeed.");
+            log.trace("Validate ModelMapper TypeMap Configuration succeed.");
         }
     }
 
@@ -167,7 +172,6 @@ public class ModelMapperAutoConfiguration {
             log.trace(" SourceNameTransformer : {}", configuration.getSourceNameTransformer());
             log.trace(" SourceNamingConvention : {}", configuration.getSourceNamingConvention());
             log.trace(" DestinationNameTokenizer : {}", configuration.getDestinationNameTokenizer());
-            log.trace(" DestinationNameTransformer : {}", configuration.getDestinationNameTransformer());
             log.trace(" DestinationNameTransformer : {}", configuration.getDestinationNameTransformer());
             log.trace(" DestinationNamingConvention : {}", configuration.getDestinationNamingConvention());
             log.trace(" MatchingStrategy : {}", configuration.getMatchingStrategy());

@@ -258,7 +258,7 @@ class ModelMapperAutoConfigurationTest {
             assertThat(configuration.isDeepCopyEnabled()).isEqualTo(false);
             assertThat(properties.isSpringProviderEnabled()).isEqualTo(true);
             assertThat(configuration.getProvider().getClass().getSimpleName()).contains("SpringProvider");
-            assertThat(output).contains("Validate ModelMapper Configuration succeed.");
+            assertThat(output).contains("Validate ModelMapper TypeMap Configuration succeed.");
         }
     }
 
@@ -354,10 +354,10 @@ class ModelMapperAutoConfigurationTest {
             assertThat(configuration.getSourceNamingConvention()).isEqualTo(NamingConventions.JAVABEANS_ACCESSOR);
             assertThat(configuration.getMatchingStrategy()).isEqualTo(MatchingStrategies.STANDARD);
             assertThat(output).contains(
-                    "org.modelmapper.spi.NameTokenizer not allow [invalid], convert to null.",
-                    "org.modelmapper.spi.NameTransformer not allow [invalid], convert to null.",
-                    "org.modelmapper.spi.NamingConvention not allow [invalid], convert to null.",
-                    "org.modelmapper.spi.MatchingStrategy not allow [invalid], convert to null.");
+                    "org.modelmapper.spi.NameTokenizer not allow [invalid], use default.",
+                    "org.modelmapper.spi.NameTransformer not allow [invalid], use default.",
+                    "org.modelmapper.spi.NamingConvention not allow [invalid], use default.",
+                    "org.modelmapper.spi.MatchingStrategy not allow [invalid], use default.");
         }
     }
 

@@ -139,25 +139,25 @@ Module module() {
 Change the behavior of `ModelMapper`.
 Please see [Configuration](http://modelmapper.org/user-manual/configuration/).
 
-| name                                         | candidates                                       |
-|----------------------------------------------|--------------------------------------------------|
-| modelmapper.source-name-tokenizer            | `Camel Case`,`Underscore`                        |
-| modelmapper.source-name-transformer          | `Javabeans Accessor`,`Javabeans Mutator`         |
-| modelmapper.source-naming-convention         | `Javabeans Accessor`,`Javabeans Mutator`,`None`  |
-| modelmapper.destination-name-tokenizer       | `Camel Case`,`Underscore`                        |
-| modelmapper.destination-name-transforme      | `Javabeans Accessor`,`Javabeans Mutator`         |
-| modelmapper.destination-naming-convention    | `Javabeans Accessor`,`Javabeans Mutator`,`None`  |
-| modelmapper.matching-strategy                | `Loose`,`Standard`,`Strict`                      |
-| modelmapper.field-access-level               | `public`,`protected`,`package_private`,`private` |
-| modelmapper.method-access-level              | `public`,`protected`,`package_private`,`private` |
-| modelmapper.field-matching-enabled           | boolean                                          |
-| modelmapper.ambiguity-ignored                | boolean                                          |
-| modelmapper.full-type-matching-required      | boolean                                          |
-| modelmapper.implicit-mapping-enabled         | boolean                                          |
-| modelmapper.skip-null-enabled                | boolean                                          |
-| modelmapper.collections-merge-enabled        | boolean                                          |
-| modelmapper.use-o-s-gi-class-loader-bridging | boolean                                          |
-| modelmapper.deep-copy-enabled                | boolean                                          |
+| name                                                       | candidates                                       |
+|------------------------------------------------------------|--------------------------------------------------|
+| modelmapper.configuration.source-name-tokenizer            | `Camel Case`,`Underscore`                        |
+| modelmapper.configuration.source-name-transformer          | `Javabeans Accessor`,`Javabeans Mutator`         |
+| modelmapper.configuration.source-naming-convention         | `Javabeans Accessor`,`Javabeans Mutator`,`None`  |
+| modelmapper.configuration.destination-name-tokenizer       | `Camel Case`,`Underscore`                        |
+| modelmapper.configuration.destination-name-transforme      | `Javabeans Accessor`,`Javabeans Mutator`         |
+| modelmapper.configuration.destination-naming-convention    | `Javabeans Accessor`,`Javabeans Mutator`,`None`  |
+| modelmapper.configuration.matching-strategy                | `Loose`,`Standard`,`Strict`                      |
+| modelmapper.configuration.field-access-level               | `public`,`protected`,`package_private`,`private` |
+| modelmapper.configuration.method-access-level              | `public`,`protected`,`package_private`,`private` |
+| modelmapper.configuration.field-matching-enabled           | boolean                                          |
+| modelmapper.configuration.ambiguity-ignored                | boolean                                          |
+| modelmapper.configuration.full-type-matching-required      | boolean                                          |
+| modelmapper.configuration.implicit-mapping-enabled         | boolean                                          |
+| modelmapper.configuration.skip-null-enabled                | boolean                                          |
+| modelmapper.configuration.collections-merge-enabled        | boolean                                          |
+| modelmapper.configuration.use-o-s-gi-class-loader-bridging | boolean                                          |
+| modelmapper.configuration.deep-copy-enabled                | boolean                                          |
 
 #### Spring Integration
 

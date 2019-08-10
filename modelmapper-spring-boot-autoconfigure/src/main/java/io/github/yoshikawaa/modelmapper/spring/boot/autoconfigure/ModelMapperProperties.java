@@ -15,7 +15,7 @@
  */
 package io.github.yoshikawaa.modelmapper.spring.boot.autoconfigure;
 
-import org.modelmapper.config.Configuration;
+import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration.AccessLevel;
 import org.modelmapper.spi.MatchingStrategy;
 import org.modelmapper.spi.NameTokenizer;
@@ -27,7 +27,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Configuration Properties for {@link Configuration}.
+ * Configuration Properties for {@link ModelMapper}.
  *
  * @author Atsushi Yoshikawa
  */
@@ -39,23 +39,35 @@ public class ModelMapperProperties {
     public static final String PROPERTIES_PREFIX = "modelmapper";
     public static final String PROPERTIES_SPRING_PROVIDER_ENABLED = "spring-provider-enabled";
 
-    private NameTokenizer sourceNameTokenizer;
-    private NameTransformer sourceNameTransformer;
-    private NamingConvention sourceNamingConvention;
-    private NameTokenizer destinationNameTokenizer;
-    private NameTransformer destinationNameTransformer;
-    private NamingConvention destinationNamingConvention;
-    private MatchingStrategy matchingStrategy;
-    private AccessLevel fieldAccessLevel;
-    private AccessLevel methodAccessLevel;
-    private Boolean fieldMatchingEnabled;
-    private Boolean ambiguityIgnored;
-    private Boolean fullTypeMatchingRequired;
-    private Boolean implicitMappingEnabled;
-    private Boolean skipNullEnabled;
-    private Boolean collectionsMergeEnabled;
-    private Boolean useOSGiClassLoaderBridging;
-    private Boolean deepCopyEnabled;
+    private Configuration configuration;
     private boolean springProviderEnabled = false;
     private boolean validateEnabled = false;
+
+    /**
+     * Configuration Properties for {@link org.modelmapper.config.Configuration}.
+     *
+     * @author Atsushi Yoshikawa
+     */
+    @Getter
+    @Setter
+    public static class Configuration {
+
+        private NameTokenizer sourceNameTokenizer;
+        private NameTransformer sourceNameTransformer;
+        private NamingConvention sourceNamingConvention;
+        private NameTokenizer destinationNameTokenizer;
+        private NameTransformer destinationNameTransformer;
+        private NamingConvention destinationNamingConvention;
+        private MatchingStrategy matchingStrategy;
+        private AccessLevel fieldAccessLevel;
+        private AccessLevel methodAccessLevel;
+        private Boolean fieldMatchingEnabled;
+        private Boolean ambiguityIgnored;
+        private Boolean fullTypeMatchingRequired;
+        private Boolean implicitMappingEnabled;
+        private Boolean skipNullEnabled;
+        private Boolean collectionsMergeEnabled;
+        private Boolean useOSGiClassLoaderBridging;
+        private Boolean deepCopyEnabled;
+    }
 }
